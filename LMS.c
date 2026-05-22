@@ -501,7 +501,6 @@ void number_extraction(const char acc_fl[17],char num[10])
         }
     }
     num[cou]='\0';
-    // printf("\nAcc_file is %s The number is %s",acc_fl,num);   
 }
 
 void account_file_implementation(const char acc_fl[17],char num[10])
@@ -521,7 +520,6 @@ void account_file_implementation(const char acc_fl[17],char num[10])
         strcpy(rec.bk_file,bk_fl),strcpy(rec.mem_file,mem_fl);
         FILE *fptr=fopen(fpath,"w");
         fwrite(&rec,sizeof(rec),1,fptr);
-        printf("\nFiles are : %s and %s",bk_fl,mem_fl);
         fclose(fptr);
     }
 }
@@ -630,7 +628,7 @@ void book_add(const char bk_file[])
             fwrite(&bk,sizeof(Book_Record),1,fptr);
             fclose(fptr);
             ascending_book(bk_file);
-            printf("\nBOOK RECORD ADDED:\n--> BOOK_NAME:%s\n--> BOOK_AUTHOR:%s\n--> BOOK_NUM:%d\n",book_name,book_author,book_num);
+            printf("\nBOOK RECORD ADDED: BOOK_NAME=%s ,BOOK_AUTHOR=%s ,BOOK_NUM=%d\n",book_name,book_author,book_num);
         }
         else
         {
@@ -1349,7 +1347,7 @@ void member_add(const char mem_file[])
                         fwrite(&mem,sizeof(Member_Record),1,fptr);
                         fclose(fptr);
                         ascending_member(mem_file);
-                        printf("\nMEMBER Record ADDED:\n--> MEMBER_ID:%d\n--> MEMBER_NAME:%s\n--> MEMBER_PH:%lld\n",mem_id,mem_name,mem.mem_phone);
+                        printf("\nMEMBER Record ADDED: MEMBER_ID=%d ,MEMBER_NAME=%s ,MEMBER_PH=%lld\n",mem_id,mem_name,mem.mem_phone);
                     }
                     else
                     {
