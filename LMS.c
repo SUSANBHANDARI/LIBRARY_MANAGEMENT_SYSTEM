@@ -49,7 +49,7 @@ typedef struct mem_rec
 
 // Function Declarations
 void enter_to_move();
-void choice_format(char [],int);
+void title_format(char [],int);
 void input_clear(void *,int);
 int continue_return();
 int digit_count(const void *,int);
@@ -104,7 +104,7 @@ int main()
     printf("\nPress Enter Button To Get Started");
     while(1)
     {
-        choice_format("MAIN MENU",1);
+        title_format("MAIN MENU",1);
         printf("\nEnter choice :\n1. SIGN UP\n2. SIGN IN\n3. EXIT\n");
         printf("\nYour choice:"); 
         input_clear(&ch,sizeof(ch)); 
@@ -142,7 +142,7 @@ void enter_to_move()
     }
 }
 
-void choice_format(char str[],int num)
+void title_format(char str[],int num)
 {
     int len=strlen(str)+4;
     if(num!=0)
@@ -535,7 +535,7 @@ void Library_actions(const char acc_fl[])
     int ch=0;
     while(1)
     {
-        choice_format("LIBRARY MENU",1);
+        title_format("LIBRARY MENU",1);
         printf("\nEnter choice :\n1. BOOK SECTION\n2. MEMBER SECTION\n3. RETURN\n");
         printf("\nYour choice:");
         input_clear(&ch,sizeof(ch));
@@ -567,7 +567,7 @@ void book_section(const Record_File rec)
     printf("\nPress Enter again...");
     while(1)
     {
-        choice_format("BOOK MENU",1);
+        title_format("BOOK MENU",1);
         printf("\nEnter choice :\n1. BOOK ADD\n2. BOOK LIST\n3. BOOK DELETE\n4. BOOK UPDATE\n5. PROVIDE RETURN\n6. RETURN\n");
         printf("\nYour choice:");
         input_clear(&ch,sizeof(ch));
@@ -608,7 +608,7 @@ void book_add(const char bk_file[])
     char book_name[21],book_author[26];
     int book_num;
     printf("\nPress Enter again...");
-    choice_format("BOOK ADD",1);
+    title_format("BOOK ADD",1);
     dtop:
     printf("\nBOOK_NAME[ADD]:");
     fixinput(book_name,sizeof(book_name),0);
@@ -633,7 +633,7 @@ void book_add(const char bk_file[])
         else
         {
             printf("\nError You have to input number. Press Enter to continue");
-            choice_format("BOOK ADD",1);
+            title_format("BOOK ADD",1);
             printf("\nBOOK_NAME[ADD]:%s\n",book_name);
             printf("\nBOOK_AUTHOR[ADD]:%s\n",book_author);
             goto ntop;
@@ -647,7 +647,7 @@ void book_add(const char bk_file[])
             return;
         }
         system("CLS");
-        choice_format("BOOK ADD",0);
+        title_format("BOOK ADD",0);
         goto dtop;
     }
 }
@@ -733,12 +733,12 @@ void book_list(const char bk_file[],int num)
         {
             if(num==0)
             {
-                choice_format("BOOK RECORDS",0);
+                title_format("BOOK RECORDS",0);
             }
             else
             {
                 printf("\nPress Enter again...");
-                choice_format("BOOK RECORDS",1);
+                title_format("BOOK RECORDS",1);
             }
             FILE *fptr=fopen(bk_file,"r");
             Book_Record bk;
@@ -774,7 +774,7 @@ void book_delete(const char bk_file[])
         {
             book_list(bk_file,1);
             top:
-            choice_format("BOOK DELETE",0);
+            title_format("BOOK DELETE",0);
             printf("\nBOOK_NAME[DELETE]:");
             fixinput(book_name,sizeof(book_name),0);
             printf("\nBOOK_AUTHOR[DELETE]:");
@@ -831,7 +831,7 @@ void book_update(const char bk_file[])
         {
             book_list(bk_file,1);
             top:
-            choice_format("BOOK UPDATE[RECORD]",0);
+            title_format("BOOK UPDATE[RECORD]",0);
             printf("\nBOOK_NAME[UPDATE]:");
             fixinput(book_name,sizeof(book_name),0);
             printf("\nBOOK_AUTHOR[UPDATE]:");
@@ -886,7 +886,7 @@ void book_update_field(char book_name[],int name_size,char book_author[],int aut
     int temp_bnum=0,ch=0;
     char temp_bname[name_size],temp_bauthor[author_size];
     top:
-    choice_format("BOOK UPDATE[FIELD]",1);
+    title_format("BOOK UPDATE[FIELD]",1);
     printf("\nEnter choice :\n1. BOOK_NAME[%s]\n2. BOOK_AUTHOR[%s]\n3. BOOK_QTY[%d]\n\nYOUR CHOICE:",book_name,book_author,*book_num);
     input_clear(&ch,sizeof(ch));
     scanf("%d",&ch);
@@ -945,7 +945,7 @@ void book_provide_return(const Record_File rec)
     printf("\nPress Enter again...");
     while(1)
     {
-        choice_format("BOOK PROVIDE RETURN",1);
+        title_format("BOOK PROVIDE RETURN",1);
         printf("\nEnter choice :\n1. BOOK PROVIDE\n2. PROVIDE DETAIL\n3. BOOK RETURN\n4. RETURN\n");
         printf("\nYour choice:");
         input_clear(&ch,sizeof(ch));
@@ -989,7 +989,7 @@ void book_provide(const Record_File rec)
             mtop:
             system("CLS");
             book_list(bpath,0);
-            choice_format("BOOK PROVIDE",0);
+            title_format("BOOK PROVIDE",0);
             printf("MEMBER_ID[PROVIDE]:");
             input_clear(&mem_id,sizeof(mem_id));
             if(scanf("%d",&mem_id)==0)
@@ -1044,7 +1044,7 @@ void book_provide(const Record_File rec)
                             {
                                 system("CLS");
                                 book_list(bpath,0);
-                                choice_format("BOOK PROVIDE",0);
+                                title_format("BOOK PROVIDE",0);
                                 printf("MEMBER_ID[PROVIDE]:%d\n",mem_id);
                                 goto btop;
                             }
@@ -1090,14 +1090,14 @@ void provide_detail(const Record_File rec)
             bookprovidecount(mpath,&count);
             if(count!=0)
             {
-                choice_format("BOOK PROVIDE DETAILS",1);
+                title_format("BOOK PROVIDE DETAILS",1);
                 Member_Record mem;
                 FILE *fptr=fopen(mpath,"r");
                 while(fread(&mem,sizeof(Member_Record),1,fptr))
                 {
                     if(mem.book_borrow>0)
                     {
-                        printf("\n%-10s:%-5d %-20s %-13s:%-5d\n","MEMBER_ID",mem.mem_id," ","BOOK_PVD_QTY",mem.book_borrow);
+                        printf("\n%-12s:%-5d %-20s %-13s:%-5d\n%-12s:%-s\n%-12s:%-lld\n","MEMBER_ID",mem.mem_id," ","BOOK_PVD_QTY",mem.book_borrow,"MEMBER_NAME",mem.mem_name,"MEMBER_PH",mem.mem_phone);
                         printf("-------------------------------------------------------\n");
                         printf("    %-25s %-30s\n","BOOK_NAME","BOOK_AUTHOR");
                         for(int i=0;i<=mem.book_borrow-1;i++)
@@ -1153,7 +1153,7 @@ void book_return(const Record_File rec)
             if(count!=0)
             {
                 top:
-                choice_format("BOOK RETURN",1);
+                title_format("BOOK RETURN",1);
                 mtop:
                 printf("MEMBER_ID[RETURN]:");
                 input_clear(&mem_id,sizeof(mem_id));
@@ -1172,7 +1172,7 @@ void book_return(const Record_File rec)
                         if(mem.book_borrow>0)
                         {
                             btop:
-                            printf("\n%-10s:%-5d %-20s %-13s:%-5d\n","MEMBER_ID",mem.mem_id," ","BOOK_PVD_QTY",mem.book_borrow);
+                            printf("\n%-12s:%-5d %-20s %-13s:%-5d\n%-12s:%-s\n%-12s:%-lld\n","MEMBER_ID",mem.mem_id," ","BOOK_PVD_QTY",mem.book_borrow,"MEMBER_NAME",mem.mem_name,"MEMBER_PH",mem.mem_phone);
                             printf("-------------------------------------------------------\n");
                             printf("    %-25s %-30s\n","BOOK_NAME","BOOK_AUTHOR");
                             for(int i=0;i<=mem.book_borrow-1;i++)
@@ -1237,7 +1237,7 @@ void book_return(const Record_File rec)
                                 if(continue_return())
                                 {
                                     system("CLS");
-                                    choice_format("BOOK RETURN",0);
+                                    title_format("BOOK RETURN",0);
                                     printf("MEMBER_ID[RETURN]:%d\n",mem_id);
                                     goto btop;
                                 }
@@ -1259,7 +1259,7 @@ void book_return(const Record_File rec)
                         return;
                     }
                     system("CLS");
-                    choice_format("BOOK RETURN",0);
+                    title_format("BOOK RETURN",0);
                     goto mtop;
                 }
             }
@@ -1281,7 +1281,7 @@ void member_section(const char mem_file[])
     printf("\nPress Enter again...");
     while(1)
     {
-        choice_format("MEMBER MENU",1);
+        title_format("MEMBER MENU",1);
         printf("\nEnter choice :\n1. MEMBER ADD\n2. MEMBER LIST\n3. MEMBER DELETE\n4. MEMBER UPDATE\n5. RETURN\n");
         printf("\nYour choice:");
         input_clear(&ch,sizeof(ch));
@@ -1320,7 +1320,7 @@ void member_add(const char mem_file[])
     long long mem_phone=0;
     printf("\nPress Enter again...");
     idtop:
-    choice_format("MEMBER ADD",1);
+    title_format("MEMBER ADD",1);
     ctop:
     printf("\nMEMBER_ID[ADD]:");
     input_clear(&mem_id,sizeof(mem_id));
@@ -1357,7 +1357,7 @@ void member_add(const char mem_file[])
                             return;
                         }
                         system("CLS");
-                        choice_format("MEMBER ADD",0);
+                        title_format("MEMBER ADD",0);
                         goto phtop;
                     }
                 }
@@ -1371,7 +1371,7 @@ void member_add(const char mem_file[])
             {
                 printf("\nError You have to input number. Press Enter to continue");
                 dtop:
-                choice_format("MEMBER ADD",1);
+                title_format("MEMBER ADD",1);
                 phtop:
                 printf("\nMEMBER_ID[ADD]:%d\n",mem_id);
                 printf("\nMEMBER_NAME[ADD]:%s\n",mem_name);
@@ -1386,7 +1386,7 @@ void member_add(const char mem_file[])
                 return;
             }
             system("CLS");
-            choice_format("BOOK ADD",0);
+            title_format("BOOK ADD",0);
             goto ctop;
         }
     }
@@ -1488,12 +1488,12 @@ void member_list(const char mem_file[],int num)
         {
             if(num==0)
             {
-                choice_format("MEMBER RECORDS",0);
+                title_format("MEMBER RECORDS",0);
             }
             else
             {
                 printf("\nPress Enter again...");
-                choice_format("MEMBER RECORDS",1);
+                title_format("MEMBER RECORDS",1);
             }
             FILE *fptr=fopen(mem_file,"r");
             Member_Record mem;
@@ -1528,7 +1528,7 @@ void member_delete(const char mem_file[])
         {
             member_list(mem_file,1);
             ctop:
-            choice_format("MEMBER DELETE",0);
+            title_format("MEMBER DELETE",0);
             printf("\nMEMBER_ID[DELETE]:");
             input_clear(&mem_id,sizeof(mem_id));
             if(scanf("%d",&mem_id)==1)
@@ -1592,7 +1592,7 @@ void member_update(const char mem_file[])
         {
             member_list(mem_file,1);
             top:
-            choice_format("MEMBER UPDATE[RECORD]",0);
+            title_format("MEMBER UPDATE[RECORD]",0);
             printf("\nMEMBER_ID[UPDATE]:");
             input_clear(&mem_id,sizeof(mem_id));
             if(scanf("%d",&mem_id)==1)
@@ -1656,7 +1656,7 @@ void member_update_field(int *mem_id,char mem_name[],int name_size,long long *me
     int temp_mid=0,ch=0;
     long long temp_mph=0;
     top:
-    choice_format("MEMBER UPDATE[FIELD]",1);
+    title_format("MEMBER UPDATE[FIELD]",1);
     printf("\nEnter choice :\n1. MEMBER_ID[%d]\n2. MEMBER_NAME[%s]\n3. MEMBER_PHONE[%lld]\n\nYOUR CHOICE:",*mem_id,mem_name,*mem_phone);
     input_clear(&ch,sizeof(ch));
     scanf("%d",&ch);
